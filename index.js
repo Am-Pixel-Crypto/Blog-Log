@@ -1,16 +1,13 @@
 import express from "express";
 import bodyParser from "body-parser";
 import crypto from "crypto";
+import serverless from "serverless-http";
+import path from "path";
 
 const app = express();
-const port = process.env.PORT || 3000;
-
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static(path.join(process.cwd(), "public")));
 
 app.use((req, res, next) => {
     res.locals.q = "";
@@ -25,9 +22,7 @@ app.get("/create", (req, res) => {
 app.post("/create", (req, res) => {
     const { title, description } = req.body;
     if (!title.trim() || !description.trim()) {
-
         return res.render("create.ejs", { error: "Please fill in all fields." });
-
     }
     createPosts(title, description);
     res.redirect("/");
@@ -89,10 +84,6 @@ app.post("/delete/:id", (req, res) => {
     res.redirect("/");
 });
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-});
-
 class blog {
     constructor(title, description) {
         this.id = crypto.randomUUID();
@@ -117,8 +108,11 @@ let posts = [
         "Why I Chose Server-Side Rendering Before Learning Databases",
         "Before diving into databases and authentication, I wanted to fully understand how server-side rendering works. By building a blog without persistent storage, I could focus on Express routing, form handling, and application structure without unnecessary complexity. This approach helped me build confidence with backend fundamentals and prepared me to later introduce databases and REST APIs in a structured way."
     )
+];
 
-]
+// Wrap Express app for Vercel serverless
+export default serverless(app);
+
 
 
 

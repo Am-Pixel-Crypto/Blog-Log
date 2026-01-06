@@ -1,0 +1,67 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  
+
+  <div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      <i class="bi bi-funnel"></i> Filter
+    </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item <%= sort === 'newest' ? 'active' : '' %>"
+            href="/?sort=newest&q=<%= q %>">
+            Newest to Oldest
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item <%= sort === 'oldest' ? 'active' : '' %>"
+            href="/?sort=oldest&q=<%= q %>">
+            Oldest to Newest
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item <%= sort === 'alpha' ? 'active' : '' %>"
+            href="/?sort=alpha&q=<%= q %>">
+            Alphabetical
+          </a>
+        </li>
+      </ul>
+  </div>
+
+  <a href="/create" class="btn btn-dark">
+    + Create Post
+  </a>
+
+</div>
+
+
+      <% if (posts.length === 0) { %>
+        <p class="text-center text-muted">No posts found.</p>
+      <% } %>
+
+      <% posts.forEach((post, index) => { %>
+        <div class="post-card mb-4">
+          <h3>
+            <a href="/post/<%= post.id %>" class="post-title">
+              <%= post.title %>
+            </a>
+          </h3>
+
+          <small class="text-muted"><%= post.date %></small>
+
+          <p class="mt-2">
+            <%= post.description.split(" ").slice(0, 20).join(" ") %> <% if ((post.description.split(" ")).length > 20) { %>...<% } %>
+          </p>
+        </div>
+      <% }) %>
+
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer.ejs") %>

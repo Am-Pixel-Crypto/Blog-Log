@@ -1,0 +1,26 @@
+<%- include("partials/header.ejs") %>
+
+        <form action="/create" method="POST">
+            <div class="post-card mb-4">
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Blah Blah Blah" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-control" rows="4" required></textarea>
+                </div>
+                <% if (locals.error) {%>
+                <% if (error) { %>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } }%>
+
+                <button class="btn btn-primary" type="submit">Post</button>
+            </div>
+        </form>
+
+<%- include("partials/footer.ejs") %>

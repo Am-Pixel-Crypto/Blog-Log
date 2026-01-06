@@ -1,11 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import crypto from "crypto";
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -97,9 +93,6 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 
-export default app;
-
-
 class blog {
     constructor(title, description) {
         this.id = crypto.randomUUID();
@@ -126,5 +119,6 @@ let posts = [
     )
 
 ]
+
 
 

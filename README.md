@@ -25,7 +25,7 @@ Posts are stored in server memory to focus on:
 All data resets on server restart.
 
 ## Live Demo
-🔗[https://blog-log--am-pixel-crypto.replit.app/]
+🔗 https://blog-log--am-pixel-crypto.replit.app/
 
 ## Getting Started
 ```bash

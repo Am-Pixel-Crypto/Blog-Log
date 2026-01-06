@@ -8,6 +8,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(process.cwd(), "public")));
+app.set("views", path.join(process.cwd(), "view"));
 
 app.use((req, res, next) => {
     res.locals.q = "";
@@ -84,6 +85,10 @@ app.post("/delete/:id", (req, res) => {
     res.redirect("/");
 });
 
+const handler = serverless(app);
+
+export { handler as default };
+
 class blog {
     constructor(title, description) {
         this.id = crypto.randomUUID();
@@ -112,6 +117,7 @@ let posts = [
 
 // Wrap Express app for Vercel serverless
 export default serverless(app);
+
 
 
 

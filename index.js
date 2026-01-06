@@ -89,6 +89,8 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 
+export default app;
+
 
 class blog {
     constructor(title, description) {
@@ -114,4 +116,5 @@ let posts = [
         "Why I Chose Server-Side Rendering Before Learning Databases",
         "Before diving into databases and authentication, I wanted to fully understand how server-side rendering works. By building a blog without persistent storage, I could focus on Express routing, form handling, and application structure without unnecessary complexity. This approach helped me build confidence with backend fundamentals and prepared me to later introduce databases and REST APIs in a structured way."
     )
+
 ]
